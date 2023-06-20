@@ -1,6 +1,17 @@
 $(document).ready(function(){
 
+    // get student
 
+    function getStudent(){
+        $.ajax({
+            type:'GET',
+            url:'/php/get_student.php',
+            success:function(data){
+                $("#get_student").html(data)
+            }
+        })
+    }
+    getStudent()
     // student save
 
     $("#save_student").on('click',function(e){
