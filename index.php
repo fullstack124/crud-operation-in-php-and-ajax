@@ -20,9 +20,7 @@ include 'includes/header.php';
                     <th class="text-left py-2 px-4 font-bold text-gray-700">Delete</th>
                 </tr>
             </thead>
-            <tbody id="get_student">
-                
-                
+            <tbody id="get_student"> 
             </tbody>
         </table>
     </div>
