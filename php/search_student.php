@@ -2,17 +2,8 @@
 
 include '../connection/config.php';
 
-if(isset($_GET['page'])){
-    $page=$_GET['page'];
-}else{
-    $page=1;
-}
 
-$limit=2;
-
-$offset=($limit -1)*$page;
-
-$sql="SELECT * FROM students ORDER BY id DESC LIMIT $offset,$limit";
+$sql="SELECT * FROM students WHERE name LIKE '%{$_POST['value']}%' OR  email LIKE '%{$_POST['value']}%' OR  phone LIKE '%{$_POST['value']}%'" ;
 $sql_run=mysqli_query($conn,$sql);
 $output="";
 if(mysqli_num_rows($sql_run) > 0){
@@ -40,21 +31,6 @@ if(mysqli_num_rows($sql_run) > 0){
     }
     $output.="</tbody>
     </table>";
-
-    $sql2="SELECT * FROM students";
-    $sql_run2=mysqli_query($conn,$sql2);
-    $total=mysqli_num_rows($sql_run2);
-    $pages=ceil($total/$limit);
-    $output .="<nav class='isolate inline-flex -space-x-px rounded-md shadow-sm pagination' aria-label='Pagination'>";
-    for($i=1;$i<=$pages;$i++){
-        if($i == $page){
-            $active='bg-indigo-600 text-white';
-        }else{
-            $active="";
-        }
-        $output .="<a href='#' data-id='{$i}' aria-current='page' class=' {$active} relative z-10 inline-flex items-center  px-4 py-2 text-sm font-semibold text-black focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'>{$i}</a>";
-    }
-    $output .="</nav>";
 }
 
    

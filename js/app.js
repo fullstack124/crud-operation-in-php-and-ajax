@@ -2,10 +2,11 @@ $(document).ready(function(){
 
     // get student
 
-    function getStudent(){
+    function getStudent(page){
         $.ajax({
             type:'GET',
             url:'/php/get_student.php',
+            data:{page:page},
             success:function(data){
                 $("#get_student").html(data)
             }
@@ -110,5 +111,29 @@ $(document).ready(function(){
             })
         }
 
+    })
+
+    // pagiantion
+
+    $(document).on('click','.pagination a',function(e){
+        e.preventDefault()
+        const id=$(this).data('id')
+        getStudent(id)
+    })
+
+
+    // search
+
+    $("#search").keyup(function(){
+        const value=$(this).val();
+
+        $.ajax({
+            type:'POST',
+            url:'/php/search_student.php',
+            data:{value:value},
+            success:function(data){
+                $("#get_student").html(data)
+            }
+        })
     })
 })
